@@ -1,4 +1,4 @@
-package board.mandelbrot;
+package board.fractals;
 
 import java.awt.Color;
 

@@ -6,7 +6,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import board.mandelbrot.Fractal;
+import board.fractals.Fractal;
 
 public class FractalPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
