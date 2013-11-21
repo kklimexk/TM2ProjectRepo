@@ -16,8 +16,8 @@ public abstract class FractalGenerator {
 		this.color = color;
 	}
 
-	protected abstract Color iterate(double re, double im);
-	
+	protected abstract Color iterate(Complex z);
+
 	protected Color scaleColor(int i) {
 		i = i == 0 ? 1 : i;
 		double d = maxIterations / i;
@@ -25,14 +25,10 @@ public abstract class FractalGenerator {
 				(int) (color.getGreen() / d), (int) (color.getBlue() / d));
 	}
 
-	protected double abs(double re, double im) {
-		return re * re + im * im;
+	protected boolean escapesToInfinity(Complex z) {
+		return z.abs() > 4.;
 	}
 
-	protected boolean escapesToInfinity(double re, double im) {
-		return abs(re, im) > 4.;
-	}
-	
 	public Fractal create(double minRe, double maxRe, double minIm, double maxIm) {
 		double dx = Math.abs(minRe - maxRe) / width;
 		double dy = Math.abs(minIm - maxIm) / height;
@@ -42,11 +38,11 @@ public abstract class FractalGenerator {
 			double re = minRe + x * dx;
 			for (int y = 0; y < height; y++) {
 				double im = maxIm - y * dy;
-				fractal.getImage()[x][y] = iterate(re, im);
+				fractal.getImage()[x][y] = iterate(new Complex(re, im));
 			}
 		}
 
 		return fractal;
 	}
-	
+
 }

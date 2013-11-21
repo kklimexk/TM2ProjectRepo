@@ -9,7 +9,8 @@ import javax.swing.SwingUtilities;
 
 import board.fractals.Fractal;
 import board.fractals.FractalGenerator;
-import board.fractals.Julia.MandelbrotSetGenerator;
+import board.fractals.Julia.JuliaSetGenerator;
+import board.fractals.Julia.MultibrotSetGenerator;
 import board.gui.pc.FractalPanel;
 
 public class Main {
@@ -22,23 +23,24 @@ public class Main {
 				int height = 900;
 				int width = 1440;
 
-				double minRe = -2.0;
-				double maxRe = 1.0;
-				double minIm = -1.2;
+				double minRe = -2.4;
+				double maxRe = 1.2;
+				double minIm = -1.4;
 				double maxIm = minIm + (maxRe - minRe) * 3 / 4;
 
 				System.out.println(maxIm);
 
-				Color color = Color.blue;
+				Color color = Color.red;
 				int maxIterations = 100;
 				FractalGenerator gen;
 
-				 gen = new MandelbrotSetGenerator(width,
-				 height, maxIterations, color);
-//				// gen = new JuliaSetGenerator(width, height, maxIterations,
-//				// color, -0.75543, 0.08101);
-//				gen = new BurningShipSetGenerator(width, height, maxIterations,
-//						color);
+				gen = new MultibrotSetGenerator(width, height, maxIterations,
+						color, 2);
+				gen = new JuliaSetGenerator(width, height, maxIterations,
+				color, -0.75543, 0.08101);
+//				 gen = new BurningShipGenerator(width, height,
+//				 maxIterations,
+//				 color, 2);
 
 				Fractal fractal = gen.create(minRe, maxRe, minIm, maxIm);
 
