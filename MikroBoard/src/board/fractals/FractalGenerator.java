@@ -19,10 +19,21 @@ public abstract class FractalGenerator {
 	protected abstract Color iterate(Complex z);
 
 	protected Color scaleColor(int i) {
+		double span = maxIterations / 2;
 		i = i == 0 ? 1 : i;
-		double d = maxIterations / i;
-		return new Color((int) (color.getRed() / d),
-				(int) (color.getGreen() / d), (int) (color.getBlue() / d));
+		double step;
+		if (i * 2 < maxIterations) {
+			step = i / span;
+			return new Color((int) (color.getRed() * step),
+					(int) (color.getGreen() * step),
+					(int) (color.getBlue() * step));
+		} else {
+			step = i / span - 1;
+			return new Color((int) (Color.white.getRed() * step),
+					(int) (Color.white.getGreen() * step),
+					(int) (Color.white.getBlue() * step));
+		}
+
 	}
 
 	protected boolean escapesToInfinity(Complex z) {
